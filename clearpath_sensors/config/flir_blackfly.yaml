@@ -32,3 +32,11 @@ flir_blackfly:
     chunk_enable_gain: true
     chunk_selector_timestamp: Timestamp
     chunk_enable_timestamp: true
+image_debayer:
+  ros__parameters:
+    ffmpeg_image_transport:
+      qmax: 40
+      preset: superfast
+      tune: zerolatency
+      bit_rate: 1000000
+      gop_size: 15
