@@ -32,6 +32,10 @@ flir_blackfly:
     chunk_enable_gain: true
     chunk_selector_timestamp: Timestamp
     chunk_enable_timestamp: true
+    flir_blackfly:
+      image_raw:
+        enable_pub_plugins:
+          - image_transport/raw
 image_debayer:
   ros__parameters:
     ffmpeg_image_transport:
