@@ -19,7 +19,7 @@ flir_blackfly:
     # binning_x: 1
     # binning_y: 1
     frame_rate_auto: Off
-    frame_rate: 40.0
+    frame_rate: 30
     frame_rate_enable: true
     buffer_queue_size: 1
     trigger_mode: Off
