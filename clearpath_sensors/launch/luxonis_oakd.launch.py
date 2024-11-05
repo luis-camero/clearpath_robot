@@ -75,13 +75,12 @@ def launch_setup(context):
 
     depthai_pcl_node = ComposableNode(
         package='depth_image_proc',
-        plugin='depth_image_proc::PointCloudXyzrgbNode',
-        name='point_cloud_xyzrgb_node',
+        plugin='depth_image_proc::PointCloudXyzNode',
+        name='point_cloud_xyz_node',
         namespace=namespace,
         remappings=[
-            ('depth_registered/image_rect', 'stereo/image'),
-            ('rgb/image_rect_color', 'color/image'),
-            ('rgb/camera_info', 'color/camera_info'),
+            ('image_rect', 'stereo/image'),
+            ('camera_info', 'stereo/camera_info'),
         ],
     )
 
