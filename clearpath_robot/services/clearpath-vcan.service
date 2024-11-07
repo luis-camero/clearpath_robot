@@ -6,7 +6,7 @@ After=network.target
 Restart=on-failure
 User=root
 Type=forking
-ExecStart=/bin/sh -e /usr/sbin/clearpath-vcan-bridge
+ExecStart=/bin/bash -e /etc/clearpath/vcan-start
 
 [Install]
 WantedBy=multi-user.target

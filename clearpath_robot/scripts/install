@@ -47,19 +47,11 @@ class VirtualCANProvider(robot_upstart.providers.Generic):
         vcan_service_path = os.path.join(
             get_package_share_directory('clearpath_robot'),
             'services/clearpath-vcan.service')
-        with open(vcan_service_path) as f:
-            vcan_service_contents: str = ''
-            vcan_service_lines = f.readlines()
-            for line in vcan_service_lines:
-                # Customize vcan bridges
-                if 'ExecStart=' in line:
-                    if puma_enabled:
-                        line = 'ExecStart=/bin/sh -e /usr/sbin/clearpath-vcan-bridge'
-                        line += ' -p 11412 -d /dev/ttycan0 -v vcan0 -b s8'
-                vcan_service_contents += line
         vcan_bridge_path = os.path.join(
             get_package_share_directory('clearpath_robot'),
             'scripts/vcan')
+        with open(vcan_service_path) as f:
+            vcan_service_contents = f.read()
         with open(vcan_bridge_path) as f:
             vcan_bridge_contents = f.read()
         return {
