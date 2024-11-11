@@ -55,7 +55,12 @@ def generate_launch_description():
       plugin='phidgets::SpatialRosI',
       name='phidgets_spatial',
       namespace=namespace,
-      parameters=[parameters]
+      parameters=[parameters],
+      remappings=[
+          ('imu/data_raw', 'data_raw'),
+          ('imu/mag', 'mag'),
+          ('imu/is_calibrated', 'is_calibrated')
+      ]
     )
 
     imu_processing_container = ComposableNodeContainer(
