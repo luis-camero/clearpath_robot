@@ -55,6 +55,7 @@ jobs:
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ github.token }}
         run: |
+          echo "repository: $GH_REPO"
           labels=$(gh pr view "$NUMBER" --json labels -q '.labels|map(.name)')
           branch=$(gh pr view "$NUMBER" --json headRefName -q '.headRefName')
           echo "labels: $labels"
