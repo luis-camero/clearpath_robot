@@ -48,6 +48,37 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
+      - id: get_labels_step
+        name: Get labels and generate repos
+        env:
+          NUMBER: ${{ github.event.pull_request.number }}
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "repository: $GH_REPO"
+          labels=$(gh pr view "$NUMBER" --json labels -q '.labels|map(.name)')
+          branch=$(gh pr view "$NUMBER" --json headRefName -q '.headRefName')
+          echo "labels: $labels"
+          echo "branch: $branch"
+          version_common=humble
+          if [[ $labels == *"common"* ]]; then
+            version_common=$branch
+            echo "common is there"
+          fi
+          version_config=humble
+          if [[ $labels == *"config"* ]]; then
+            version_config=$branch
+            echo "config is there"
+          fi
+          version_msgs=humble
+          if [[ $labels == *"msgs"* ]]; then
+            version_msgs=$branch
+            echo "msgs is there"
+          fi
+          echo -e "repositories:" >> tmp_dependencies.repos
+          echo -e "  clearpath_config:\n    type: git\n    url: https://github.com/clearpathrobotics/clearpath_config.git\n    version: humble-1.0RC" >> tmp_dependencies.repos
+          echo -e "  clearpath_common:\n    type: git\n    url: https://github.com/clearpathrobotics/clearpath_common.git\n    version: humble-1.0RC" >> tmp_dependencies.repos
+          echo -e "  clearpath_msgs:\n    type: git\n    url: https://github.com/clearpathrobotics/clearpath_msgs.git\n    version: humble-1.0RC" >> tmp_dependencies.repos
       - uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: humble
@@ -60,4 +91,4 @@ jobs:
             clearpath_generator_robot
             clearpath_robot
             clearpath_sensors
-          vcs-repo-file-url: dependencies.repos
+          vcs-repo-file-url: tmp_dependencies.repos
