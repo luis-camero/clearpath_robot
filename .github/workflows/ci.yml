@@ -49,23 +49,35 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: get_labels_step
-        name: Get labels
+        name: Get labels and generate repos
         env:
           NUMBER: ${{ github.event.pull_request.number }}
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ github.token }}
         run: |
           labels=$(gh pr view "$NUMBER" --json labels -q '.labels|map(.name)')
-          branch=$(gh pr view "$NUMBER" --json headRefName)
+          branch=$(gh pr view "$NUMBER" --json headRefName -q '.headRefName')
           echo "labels: $labels"
           echo "branch: $branch"
-      - id: generate_repos
-        name: Generate repos
-        run: |
+          version_common=humble
+          if [[ $labels == *"common"* ]]; then
+            version_common=$branch
+            echo "common is there"
+          fi
+          version_config=humble
+          if [[ $labels == *"config"* ]]; then
+            version_config=$branch
+            echo "config is there"
+          fi
+          version_msgs=humble
+          if [[ $labels == *"msgs"* ]]; then
+            version_msgs=$branch
+            echo "msgs is there"
+          fi
           echo -e "repositories:" >> tmp_dependencies.repos
-          echo -e "\tclearpath_config:\n\t\ttype: git\n\t\turl: https://github.com/clearpathrobotics/clearpath_config.git\n\t\tversion: humble-1.0RC" >> tmp_dependencies.repos
-          echo -e "\tclearpath_common:\n\t\ttype: git\n\t\turl: https://github.com/clearpathrobotics/clearpath_common.git\n\t\tversion: humble-1.0RC" >> tmp_dependencies.repos
-          echo -e "\tclearpath_msgs:\n\t\ttype: git\n\t\turl: https://github.com/clearpathrobotics/clearpath_msgs.git\n\t\tversion: humble-1.0RC" >> tmp_dependencies.repos
+          echo -e "  clearpath_config:\n    type: git\n    url: https://github.com/clearpathrobotics/clearpath_config.git\n    version: humble-1.0RC" >> tmp_dependencies.repos
+          echo -e "  clearpath_common:\n    type: git\n    url: https://github.com/clearpathrobotics/clearpath_common.git\n    version: humble-1.0RC" >> tmp_dependencies.repos
+          echo -e "  clearpath_msgs:\n    type: git\n    url: https://github.com/clearpathrobotics/clearpath_msgs.git\n    version: humble-1.0RC" >> tmp_dependencies.repos
       - uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: humble
