@@ -15,7 +15,6 @@ axis_camera:
         ir: False
         defog: False
         wiper: False
-        ptz: True
 
         # PTZ limits
         ptz: True
