@@ -51,6 +51,20 @@ jobs:
       - uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: humble
+      - id: get_labels_step
+        name: Get labels
+        env:
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --jq '.labels.[].name' /repos/{owner}/{repo}/pulls/${{ github.event.number }}
+      - id: generate_repos
+        name: Generate repos
+        run: |
+          echo -e "repositories:" >> tmp_dependencies.repos
+          echo -e "\tclearpath_config:\n\t\ttype: git\n\t\turl: https://github.com/clearpathrobotics/clearpath_config.git\n\t\tversion: humble-1.0RC" >> tmp_dependencies.repos
+          echo -e "\tclearpath_common:\n\t\ttype: git\n\t\turl: https://github.com/clearpathrobotics/clearpath_common.git\n\t\tversion: humble-1.0RC" >> tmp_dependencies.repos
+          echo -e "\tclearpath_msgs:\n\t\ttype: git\n\t\turl: https://github.com/clearpathrobotics/clearpath_msgs.git\n\t\tversion: humble-1.0RC" >> tmp_dependencies.repos
       - uses: ros-tooling/action-ros-ci@v0.3
         id: action_ros_ci_step
         with:
