@@ -57,6 +57,7 @@ jobs:
         run: |
           labels=$(gh pr view "$NUMBER" --json labels -q '.labels|map(.name)')
           echo "labels: $labels"      - id: generate_repos
+      - id: generate_repos
         name: Generate repos
         run: |
           echo -e "repositories:" >> tmp_dependencies.repos
