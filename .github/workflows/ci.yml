@@ -56,7 +56,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           labels=$(gh pr view "$NUMBER" --json labels -q '.labels|map(.name)')
-          echo "labels: $labels"      - id: generate_repos
+          branch=$(gh pr view "$NUMBER" --json headRefName)
+          echo "labels: $labels"
+          echo "branch: $branch"
       - id: generate_repos
         name: Generate repos
         run: |
@@ -76,4 +78,4 @@ jobs:
             clearpath_generator_robot
             clearpath_robot
             clearpath_sensors
-          vcs-repo-file-url: dependencies.repos
+          vcs-repo-file-url: tmp_dependencies.repos
