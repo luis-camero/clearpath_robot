@@ -1,6 +1,7 @@
 [Unit]
 Description="Clearpath Virtual CAN over UDP Bridge"
-After=network.target
+PartOf=clearpath-robot.service
+After=clearpath-robot.service
 
 [Service]
 Restart=on-failure
@@ -9,4 +10,4 @@ Type=forking
 ExecStart=/bin/bash -e /etc/clearpath/vcan-start
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=clearpath-robot.service
