@@ -204,24 +204,26 @@ class RobotLaunchGenerator(LaunchGenerator):
         )
 
         # ROS2 socketcan bridges
-        ros2_socketcan_package = Package('ros2_socketcan')
+        ros2_socketcan_package = Package('clearpath_ros2_socketcan_interface')
         self.can_bridges = []
         for can_bridge in self.clearpath_config.platform.can_bridges.get_all():
             self.can_bridges.append(LaunchFile(
-                'socket_can_receiver',
+                'receiver',
                 package=ros2_socketcan_package,
                 args=[
+                    ('namespace', self.namespace),
                     ('interface', can_bridge.interface),
-                    ('from_can_bus_topic', f'{self.namespace}/{can_bridge.topic_rx}'),
+                    ('from_can_bus_topic', can_bridge.topic_rx),
                 ]
             ))
 
             self.can_bridges.append(LaunchFile(
-                'socket_can_sender',
+                'sender',
                 package=ros2_socketcan_package,
                 args=[
+                    ('namespace', self.namespace),
                     ('interface', can_bridge.interface),
-                    ('to_can_bus_topic', f'{self.namespace}/{can_bridge.topic_tx}'),
+                    ('to_can_bus_topic', can_bridge.topic_tx),
                 ]
             ))
 
