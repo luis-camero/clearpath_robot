@@ -190,10 +190,6 @@ install(
   DESTINATION include
 )
 
-install(DIRECTORY config launch
-  DESTINATION share/${PROJECT_NAME}
-)
-
 ## EXPORTS
 ament_export_include_directories(
   include
