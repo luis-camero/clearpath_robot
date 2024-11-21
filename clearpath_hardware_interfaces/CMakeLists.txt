@@ -11,6 +11,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 
 find_package(controller_interface REQUIRED)
 find_package(controller_manager REQUIRED)
@@ -188,6 +189,14 @@ install(
 install(
   DIRECTORY include/
   DESTINATION include
+)
+
+ament_python_install_package(${PROJECT_NAME})
+
+install(PROGRAMS
+  ${PROJECT_NAME}/battery_state/battery_state_estimator
+  ${PROJECT_NAME}/battery_state/battery_state_control
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 ## EXPORTS

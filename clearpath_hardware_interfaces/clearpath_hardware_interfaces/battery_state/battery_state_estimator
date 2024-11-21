@@ -45,7 +45,7 @@ from clearpath_config.clearpath_config import ClearpathConfig
 from clearpath_config.common.types.platform import Platform
 from clearpath_generator_common.common import BaseGenerator
 
-from clearpath_diagnostics.battery_state.battery import Battery
+from clearpath_hardware_interfaces.battery_state.battery import Battery
 
 
 class BatteryStateEstimator(Node):

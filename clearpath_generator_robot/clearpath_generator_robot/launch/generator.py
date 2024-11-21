@@ -134,7 +134,7 @@ class RobotLaunchGenerator(LaunchGenerator):
 
         # Battery state
         self.battery_state_estimator = LaunchFile.Node(
-            package='clearpath_diagnostics',
+            package='clearpath_hardware_interfaces',
             executable='battery_state_estimator',
             name='battery_state_estimator',
             namespace=self.namespace,
@@ -142,7 +142,7 @@ class RobotLaunchGenerator(LaunchGenerator):
         )
 
         self.battery_state_control = LaunchFile.Node(
-            package='clearpath_diagnostics',
+            package='clearpath_hardware_interfaces',
             executable='battery_state_control',
             name='battery_state_control',
             namespace=self.namespace,
