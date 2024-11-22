@@ -63,7 +63,7 @@ class RobotLaunchGenerator(LaunchGenerator):
 
         self.imu_0_filter_config = LaunchFile.LaunchArg(
             'imu_filter',
-            default_value=os.path.join(self.platform_params_path, 'imu_filter.yaml'),
+            default_value=os.path.join(self.sensors_params_path, 'imu_filter.yaml'),
         )
 
         # Configure MCU namespace and domain ID
@@ -179,7 +179,7 @@ class RobotLaunchGenerator(LaunchGenerator):
 
         # Lighting
         self.lighting_node = LaunchFile.Node(
-          package='clearpath_platform',
+          package='clearpath_hardware_interfaces',
           executable='lighting_node',
           name='lighting_node',
           namespace=self.namespace,
