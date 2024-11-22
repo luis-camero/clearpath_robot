@@ -63,7 +63,7 @@ class VirtualCANProvider(robot_upstart.providers.Generic):
                 "content": vcan_bridge_contents,
                 "mode": 0o755
             },
-            "/etc/systemd/system/multi-user.target.wants/clearpath-vcan.service": {
+            "/etc/systemd/system/clearpath-robot.service.wants/clearpath-vcan.service": {
                 "symlink": "/lib/systemd/system/clearpath-vcan.service"
             },
         }
@@ -200,8 +200,6 @@ class RobotProvider(robot_upstart.providers.Generic):
                 # Replace User with username from config
                 if 'User=' in line:
                     line = 'User={0}\n'.format(clearpath_config.system.username)
-                if 'After=' in line and puma_enabled:
-                    line = 'After=clearpath-vcan.service'
                 robot_service_contents += line
         with open(robot_service_execpre_contents_path) as f:
             robot_service_execpre_contents = f.read()
@@ -221,15 +219,6 @@ class RobotProvider(robot_upstart.providers.Generic):
                 "mode": 0o755
             }
         }
-
-
-PUMA_ENABLED = [
-    Platform.DD100,
-    Platform.DD150,
-    Platform.DO100,
-    Platform.DO150,
-    Platform.R100
-]
 
 setup_path = BaseGenerator.get_args()
 workspace_setup = os.path.join(setup_path, 'setup.bash')
@@ -259,7 +248,6 @@ if not os.path.isfile(manipulators_service_launch):
 config = read_yaml(config_path)
 # Parse YAML into config
 clearpath_config = ClearpathConfig(config)
-puma_enabled = clearpath_config.get_platform_model() in PUMA_ENABLED
 rmw = clearpath_config.system.middleware.rmw_implementation
 domain_id = clearpath_config.system.domain_id
 
