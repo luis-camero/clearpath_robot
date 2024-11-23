@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
+#
 # Software License Agreement (BSD)
 #
-# @author    Luis Camero <lcamero@clearpathrobotics.com>
+# @author    Chris Iverach-Brereton <civerachb@clearpathrobotics.com>
 # @copyright (c) 2024, Clearpath Robotics, Inc., All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -29,17 +31,21 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 
-from launch_ros.actions import ComposableNodeContainer
-from launch_ros.descriptions import ComposableNode
+from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
     parameters = LaunchConfiguration('parameters')
     namespace = LaunchConfiguration('namespace')
+    robot_namespace = LaunchConfiguration('robot_namespace')
 
     arg_namespace = DeclareLaunchArgument(
         'namespace',
+        default_value='')
+
+    arg_robot_namespace = DeclareLaunchArgument(
+        'robot_namespace',
         default_value='')
 
     arg_parameters = DeclareLaunchArgument(
@@ -47,35 +53,26 @@ def generate_launch_description():
         default_value=PathJoinSubstitution([
           FindPackageShare('clearpath_sensors'),
           'config',
-          'phidgets_spatial.yaml'
+          'axis_camera.yaml'
         ]))
 
-    phidgets_node = ComposableNode(
-      package='phidgets_spatial',
-      plugin='phidgets::SpatialRosI',
-      name='phidgets_spatial',
-      namespace=namespace,
-      parameters=[parameters],
-      remappings=[
-          ('imu/data_raw', 'data_raw'),
-          ('imu/mag', 'mag'),
-          ('imu/is_calibrated', 'is_calibrated')
-      ]
-    )
-
-    imu_processing_container = ComposableNodeContainer(
-        name='imu_processing_container',
+    axis_node = Node(
+        package='axis_camera',
+        executable='axis_camera_node',
+        name='axis_camera',
         namespace=namespace,
-        package='rclcpp_components',
-        executable='component_container',
-        composable_node_descriptions=[
-            phidgets_node,
-        ],
+        parameters=[parameters],
         output='screen',
+        remappings=[
+            ('image_raw/compressed', 'image/compressed'),
+            ('joint_states',
+                PathJoinSubstitution(['/', robot_namespace, 'platform', 'joint_states'])),
+        ]
     )
 
     ld = LaunchDescription()
     ld.add_action(arg_namespace)
     ld.add_action(arg_parameters)
-    ld.add_action(imu_processing_container)
+    ld.add_action(arg_robot_namespace)
+    ld.add_action(axis_node)
     return ld

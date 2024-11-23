@@ -36,6 +36,9 @@ source /etc/clearpath/setup.bash
 # Generate discovery server start file
 ros2 run clearpath_generator_common generate_discovery_server
 
+# Generate vcan bridge start file
+ros2 run clearpath_generator_common generate_vcan
+
 # Generate description
 ros2 run clearpath_generator_common generate_description
 

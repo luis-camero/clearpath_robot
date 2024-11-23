@@ -85,15 +85,15 @@ class SensorLaunch():
         sensor_writer.add(self.default_sensor_launch_file)
         # Cameras republishers
         if self.sensor.get_sensor_type() == BaseCamera.get_sensor_type():
-            for republihser in self.sensor._republishers:
+            for republisher in self.sensor._republishers:
                 sensor_writer.add(LaunchFile(
-                    'image_%s' % republihser.TYPE,
+                    'image_%s' % republisher.TYPE,
                     package=self.CLEARPATH_SENSORS_PACKAGE,
                     args=[
                         (self.NAMESPACE, self.namespace),
                         (self.PARAMETERS, self.parameters.full_path),
-                        (self.INPUT, republihser.input),
-                        (self.OUTPUT, republihser.output),
+                        (self.INPUT, republisher.input),
+                        (self.OUTPUT, republisher.output),
                         (self.CONTAINER, 'image_processing_container')
                     ]
                 ))
