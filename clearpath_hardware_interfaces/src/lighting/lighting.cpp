@@ -227,8 +227,8 @@ void Lighting::initializeSubscribers()
     std::bind(&Lighting::stopEngagedCallback, this, std::placeholders::_1));
 
   // Command vel
-  cmd_vel_sub_ = this->create_subscription<geometry_msgs::msg::Twist>(
-    "platform/cmd_vel_unstamped",
+  cmd_vel_sub_ = this->create_subscription<geometry_msgs::msg::TwistStamped>(
+    "platform/cmd_vel",
     rclcpp::SensorDataQoS(),
     std::bind(&Lighting::cmdVelCallback, this, std::placeholders::_1));
 }
@@ -335,7 +335,7 @@ void Lighting::stopEngagedCallback(const std_msgs::msg::Bool::SharedPtr msg)
 /**
  * @brief Command velocity callback
  */
-void Lighting::cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr msg)
+void Lighting::cmdVelCallback(const geometry_msgs::msg::TwistStamped::SharedPtr msg)
 {
   cmd_vel_msg_ = *msg;
 }
@@ -423,9 +423,9 @@ void Lighting::updateState()
     setState(State::Stopped);
   }
 
-  if (cmd_vel_msg_.linear.x != 0.0 ||
-      cmd_vel_msg_.linear.y != 0.0 ||
-      cmd_vel_msg_.angular.z != 0.0) // Robot is driving
+  if (cmd_vel_msg_.twist.linear.x != 0.0 ||
+      cmd_vel_msg_.twist.linear.y != 0.0 ||
+      cmd_vel_msg_.twist.angular.z != 0.0) // Robot is driving
   {
     setState(State::Driving);
   }
