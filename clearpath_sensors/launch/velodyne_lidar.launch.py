@@ -56,7 +56,7 @@ def generate_launch_description():
         namespace=namespace,
         parameters=[parameters],
         remappings=[
-          ('/diagnostics', 'diagnostics')
+          ('/diagnostics', 'diagnostics'),
         ],
         output='screen'
     )
@@ -68,7 +68,9 @@ def generate_launch_description():
         output='screen',
         parameters=[parameters],
         remappings=[
-          ('/diagnostics', 'diagnostics')
+          ('/diagnostics', 'diagnostics'),
+          ('/tf', 'tf'),
+          ('/tf_static', 'tf_static'),
         ],
     )
 
