@@ -2,8 +2,8 @@
 Changelog for package clearpath_robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.0 (2024-11-26)
+------------------
 * Added minimum version.
 * Make robot service always restart vcan
 * Add ur_robot_driver dependency

@@ -2,8 +2,8 @@
 Changelog for package puma_motor_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.0 (2024-11-26)
+------------------
 * Added minimum version.
 * Add clearpath_motor_drivers, puma_motor_driver
 * Contributors: Luis Camero, Tony Baltovski

@@ -2,8 +2,8 @@
 Changelog for package clearpath_sensors
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.0 (2024-11-26)
+------------------
 * Fix full velodyne remapping (`#107 <https://github.com/clearpathrobotics/clearpath_robot/issues/107>`_)
 * Velodyne tf and tf_static should be remapped to the robot namespace (`#102 <https://github.com/clearpathrobotics/clearpath_robot/issues/102>`_)
   * Remap Velodyne `/tf` and `/tf_static` topics into robot namespace

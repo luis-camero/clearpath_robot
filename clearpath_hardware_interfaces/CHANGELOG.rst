@@ -8,8 +8,8 @@ Changelog for package clearpath_platform
 0.3.3 (2024-10-04)
 ------------------
 
-Forthcoming
------------
+1.0.0 (2024-11-26)
+------------------
 * Fixed version of new package.
 * Added minimum version.
 * Remove platform.launch.py

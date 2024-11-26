@@ -2,8 +2,8 @@
 Changelog for package clearpath_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.0 (2024-11-26)
+------------------
 * Added minimum version.
 * Remove battery_state from CMakeLists
 * Move battery_state to clearpath_hardware_interfaces
