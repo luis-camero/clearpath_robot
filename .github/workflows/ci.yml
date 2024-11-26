@@ -61,3 +61,24 @@ jobs:
             clearpath_robot
             clearpath_sensors
           vcs-repo-file-url: dependencies.repos
+  clearpath-multi-robot-ci:
+    name: Jazzy Clearpath Multi-Repo Source
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: luis-camero/multi_repo_action@v0.0.1
+        with:
+          branch: base
+      - uses: ros-tooling/setup-ros@v0.7
+        with:
+          required-ros-distributions: jazzy
+      - uses: ros-tooling/action-ros-ci@v0.3
+        id: action_ros_ci_step
+        with:
+          target-ros2-distro: jazzy
+          package-name: |
+            clearpath_diagnostics
+            clearpath_generator_robot
+            clearpath_robot
+            clearpath_sensors
+          vcs-repo-file-url: tmp_dependencies.repos
