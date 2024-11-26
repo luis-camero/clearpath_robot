@@ -64,6 +64,7 @@ jobs:
   clearpath-multi-robot-ci:
     name: Jazzy Clearpath Multi-Repo Source
     runs-on: ubuntu-24.04
+    if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v3
       - uses: luis-camero/multi_repo_action@v0.0.1
