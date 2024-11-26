@@ -8,6 +8,17 @@ Changelog for package clearpath_platform
 0.3.3 (2024-10-04)
 ------------------
 
+Forthcoming
+-----------
+* Fixed version of new package.
+* Added minimum version.
+* Remove platform.launch.py
+* Move battery_state to clearpath_hardware_interfaces
+* Removed config install
+* Renamed header directory
+* Add clearpath_hardware_interfaces
+* Contributors: Luis Camero, Tony Baltovski
+
 0.3.2 (2024-09-29)
 ------------------
 

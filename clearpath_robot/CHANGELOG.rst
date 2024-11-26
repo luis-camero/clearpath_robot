@@ -2,6 +2,15 @@
 Changelog for package clearpath_robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Added minimum version.
+* Make robot service always restart vcan
+* Add ur_robot_driver dependency
+* Add vcan to robot service wants
+* Change vcan service to use generated script
+* Contributors: Luis Camero, Tony Baltovski
+
 0.3.2 (2024-10-04)
 ------------------
 * [clearpath_robot] Added script to grab diagnostic logs for troubleshooting.
