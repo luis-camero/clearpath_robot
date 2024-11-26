@@ -16,10 +16,10 @@ flir_blackfly:
     # image_height: 1080
     # offset_x: 16
     # offset_y: 0
-    # binning_x: 1
-    # binning_y: 1
+    binning_x: 2
+    binning_y: 2
     frame_rate_auto: Off
-    frame_rate: 40.0
+    frame_rate: 30
     frame_rate_enable: true
     buffer_queue_size: 1
     trigger_mode: Off
@@ -32,3 +32,25 @@ flir_blackfly:
     chunk_enable_gain: true
     chunk_selector_timestamp: Timestamp
     chunk_enable_timestamp: true
+    flir_blackfly:
+      image_raw:
+        enable_pub_plugins:
+          - image_transport/raw
+image_debayer:
+  ros__parameters:
+    ffmpeg_image_transport:
+      qmax: 40
+      preset: superfast
+      tune: zerolatency
+      bit_rate: 1000000
+      gop_size: 15
+    image_mono:
+      enable_pub_plugins:
+        - image_transport/compressed
+        - image_transport/ffmpeg
+        - image_transport/raw
+    image_color:
+      enable_pub_plugins:
+        - image_transport/compressed
+        - image_transport/ffmpeg
+        - image_transport/raw

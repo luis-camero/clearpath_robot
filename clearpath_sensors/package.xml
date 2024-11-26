@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>clearpath_sensors</name>
-  <version>0.3.1</version>
+  <version>0.3.2</version>
   <description>Clearpath sensor default launch files and configurations</description>
 
   <maintainer email="lcamero@clearpathrobotics.com">Luis Camero</maintainer>
@@ -15,12 +15,15 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <exec_depend>depthai_ros_driver</exec_depend>
+  <exec_depend>ffmpeg_image_transport</exec_depend>
   <exec_depend>flir_camera_description</exec_depend>
   <exec_depend>flir_camera_msgs</exec_depend>
   <exec_depend>image_proc</exec_depend>
   <exec_depend>image_transport_plugins</exec_depend>
   <exec_depend>microstrain_inertial_driver</exec_depend>
   <exec_depend>nmea_navsat_driver</exec_depend>
+  <exec_depend>phidgets_spatial</exec_depend>
   <exec_depend>realsense2_camera</exec_depend>
   <exec_depend>spinnaker_camera_driver</exec_depend>
   <exec_depend>umx_driver</exec_depend>
