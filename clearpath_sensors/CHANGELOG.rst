@@ -2,6 +2,9 @@
 Changelog for package clearpath_sensors
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.0.0 (2024-11-26)
 ------------------
 * Fix full velodyne remapping (`#107 <https://github.com/clearpathrobotics/clearpath_robot/issues/107>`_)
